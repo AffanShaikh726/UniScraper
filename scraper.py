@@ -76,18 +76,20 @@ def scrape_data() :
         logger.info("Navigating to target page...")
         driver.get(os.getenv("AttendancePG_URL"))
 
-        time.sleep(10)
+        time.sleep(15)
         # Perform your scraping tasks
         logger.info("Performing scraping tasks...")
         content = driver.find_element(By.CLASS_NAME, "mainDiv").text
 
         # signing out after getting the data
-        # logger.info("Signing out...")
-        # signout = wait.until(EC.presence_of_element_located((By.ID, "portalLogout")))
-        # signout.click()
-        # time.sleep(5)
-        # driver.save_screenshot(f"signoutcreen.png")
-        # print(content)
+        logger.info("Signing out...")
+        popUp = driver.find_element(By.XPATH, f"//div[@id='{"zc-account-settings"}']//a")
+        popUp.click()
+        
+        signout = wait.until(EC.presence_of_element_located((By.ID, "portalLogout")))
+        signout.click()
+        time.sleep(5)
+        driver.save_screenshot(f"signoutcreen.png")
 
     except Exception as e:
         logger.error(f"An error occurred: {e}")
