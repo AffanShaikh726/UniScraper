@@ -88,8 +88,8 @@ def scrape_data() :
         
         signout = wait.until(EC.presence_of_element_located((By.ID, "portalLogout")))
         signout.click()
-        time.sleep(5)
-        driver.save_screenshot(f"signoutcreen.png")
+        # time.sleep(5)
+        # driver.save_screenshost(f"signoutcreen.png")
 
     except Exception as e:
         logger.error(f"An error occurred: {e}")
