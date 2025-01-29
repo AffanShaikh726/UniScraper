@@ -9,6 +9,7 @@ import logging
 import time
 from dotenv import load_dotenv
 import os
+from openAI import jsonifyData
 
 load_dotenv()
 
@@ -104,7 +105,8 @@ def scrape_data() :
         # Close the browser
         logger.info("Closing the browser...")
         driver.quit()
-        return content
+        output = jsonifyData(content)
+        return output
 
 
 print(scrape_data())
