@@ -37,7 +37,7 @@ def scrape_data() :
 
         # Wait for the username field to be present
         logger.info("Waiting for username field...")
-        wait = WebDriverWait(driver, 10)
+        wait = WebDriverWait(driver, 2)
         username = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@name='LOGIN_ID']")))
 
         # Enter your username
@@ -51,7 +51,7 @@ def scrape_data() :
         next_button.click()
 
         # Wait for some time before waiting for the password field
-        time.sleep(2)  # Adjust the sleep time as needed
+        time.sleep(5)  # Adjust the sleep time as needed
 
         # Wait for the password field to appear
         logger.info("Waiting for password field...")
@@ -65,6 +65,8 @@ def scrape_data() :
         logger.info("Clicking login button...")
         login_button = next_button
         login_button.click()
+
+        time.sleep(10)
 
         # Switch back to the main content
         driver.switch_to.default_content()
@@ -109,4 +111,4 @@ def scrape_data() :
         return output
 
 
-print(scrape_data())
+# print(scrape_data())

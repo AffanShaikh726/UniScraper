@@ -1,0 +1,76 @@
+/templates/index.html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>University Data</title>
+        <style>
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                margin: 20px 0;
+            }
+            th,
+            td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+            th {
+                background-color: #f2f2f2;
+            }
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>University Data</h1>
+        <div id="data">
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>Course Code</th>
+                        <th>Course Title</th>
+                        <th>Category</th>
+                        <th>Faculty Name</th>
+                        <th>Slot</th>
+                        <th>Hours Conducted</th>
+                        <th>Hours Absent</th>
+                        <th>Attendance %</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+
+        <script>
+            fetch("/api/data")
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                    const tableBody = document.getElementById("tableBody");
+                    if (data && data.courses) {
+                        data.courses.forEach((course) => {
+                            // console.log(course["facultyName"]);
+                            const row = document.createElement("tr");
+                            row.innerHTML = `
+                                <td>${course.course_code || ""}</td>
+                                <td>${course.course_title || ""}</td>
+                                <td>${course._category || ""}</td>
+                                <td>${course.faculty_name || ""}</td>
+                                <td>${course.slot || ""}</td>
+                                <td>${course.hours_conducted || ""}</td>
+                                <td>${course.hoursAbsent || ""}</td>
+                                <td>${course.attendance_percentage || ""}</td>
+                            `;
+                            tableBody.appendChild(row);
+                        });
+                    } else {
+                        console.error("Invalid data format:", result);
+                    }
+                });
+        </script>
+    </body>
+</html>
