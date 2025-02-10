@@ -3,7 +3,12 @@ from dotenv import load_dotenv
 import os
 load_dotenv()
 
-def jsonifyData(text) :
+jsonFormat = ""
+# Method 1: Read entire file as string
+with open("jsonFormat.txt", "r", encoding="utf-8") as file:
+    jsonFormat = file.read()
+
+def jsonifyDataAI(text) :
     client = OpenAI(
         api_key=os.getenv("API_KEY"),
     )
@@ -16,7 +21,7 @@ def jsonifyData(text) :
             },
             {
                 "role": "user",
-                "content": f"Convert to JSON array:\n{text}" 
+                "content": f"Convert to JSON object:\n{text} similar to {jsonFormat}" 
             }
         ]
     )

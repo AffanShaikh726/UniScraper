@@ -62,13 +62,13 @@
                                 <td>${course.faculty_name || ""}</td>
                                 <td>${course.slot || ""}</td>
                                 <td>${course.hours_conducted || ""}</td>
-                                <td>${course.hoursAbsent || ""}</td>
-                                <td>${course.attendance_percentage || ""}</td>
+                                <td>${course.absent || "None"}</td>
+                                <td>${course.attendance_percent || ""}</td>
                             `;
                             tableBody.appendChild(row);
                         });
                     } else {
-                        console.error("Invalid data format:", result);
+                        console.error("Invalid data format:");
                     }
                 });
         </script>

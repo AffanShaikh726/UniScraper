@@ -9,7 +9,7 @@ import logging
 import time
 from dotenv import load_dotenv
 import os
-from openAI import jsonifyData
+from openAI import jsonifyDataAI
 
 load_dotenv()
 
@@ -32,7 +32,7 @@ def scrape_data() :
 
         # Switch to the iframe
         logger.info("Switching to iframe...")
-        iframe = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "iframe")))
+        iframe = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.TAG_NAME, "iframe")))
         driver.switch_to.frame(iframe)
 
         # Wait for the username field to be present
@@ -107,7 +107,7 @@ def scrape_data() :
         # Close the browser
         logger.info("Closing the browser...")
         driver.quit()
-        output = jsonifyData(content)
+        output = jsonifyDataAI(content)
         return output
 
 
