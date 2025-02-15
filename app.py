@@ -1,20 +1,20 @@
 from flask import Flask, jsonify, render_template
-# from scraper import scrape_data
-from openAI import jsonifyDataAI
+from scraper import scrape_data
+# from openAI import jsonifyDataAI
 
 app = Flask(__name__)
-# data = scrape_data()
+data = scrape_data()
 
-text = ""
-# Method 1: Read entire file as string
-with open("filename.txt", "r", encoding="utf-8") as file:
-    text = file.read()
+# text = ""
+# # Method 1: Read entire file as string
+# with open("baseData.txt", "r", encoding="utf-8") as file:
+#     text = file.read()
 
-data = jsonifyDataAI(text)
+# data = jsonifyDataAI(text)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html',content="")
 
 @app.route('/api/data', methods=['GET'])
 def get_data():
