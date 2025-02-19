@@ -66,7 +66,7 @@ def scrape_data() :
         login_button = next_button
         login_button.click()
 
-        time.sleep(10)
+        time.sleep(20)
 
         # Switch back to the main content
         driver.switch_to.default_content()
