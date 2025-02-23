@@ -1,48 +1,110 @@
+:root {
+    --primary-color: #6366f1;
+    --background-color: #e2e8f0; /* Changed to a more neutral gray */
+    --card-background: #ffffff;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --border-color: #cbd5e1; /* Darker border color */
+    --table-border: #94a3b8; /* Even darker border for table */
+}
+
 body {
-    font-family: "Roboto", sans-serif;
-    background-color: #f4f4f9;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(
+        135deg,
+        var(--background-color) 0%,
+        #f1f5f9 100%
+    );
+    min-height: 100vh;
     margin: 0;
     padding: 20px;
+    color: var(--text-primary);
 }
+
 h1 {
     text-align: center;
-    color: #333;
+    color: var(--primary-color);
     font-size: 2.5em;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
 }
+
 #data {
     margin: 20px auto;
-    max-width: 90%;
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    max-width: 1200px;
+    background-color: var(--card-background);
+    padding: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    border: 2px solid var(--border-color);
 }
+
 table {
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     width: 100%;
     margin: 20px 0;
-    border-radius: 8px;
+    border-radius: 12px;
     overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--table-border);
 }
+
 th,
 td {
-    border: 1px solid #ddd;
-    padding: 12px;
+    padding: 16px;
     text-align: left;
+    border-bottom: 1px solid var(--border-color);
 }
+
 th {
-    background-color: #4caf50;
+    background-color: var(--primary-color);
     color: white;
-    font-weight: bold;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
 }
-tr:nth-child(even) {
-    background-color: #f9f9f9;
+
+th:first-child {
+    text-align: center;
 }
+
+td {
+    font-weight: 400;
+    font-size: 0.95rem;
+}
+
+tr:not(:last-child) {
+    border-bottom: 2px solid var(--border-color);
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+/* Update hover effect for better contrast */
 tr:hover {
-    background-color: #f1f1f1;
+    background-color: #f1f5f9;
+    transition: all 0.2s ease;
 }
-@media (max-width: 768px) {
+
+@media (max-width: 1000px) {
+    #data {
+        padding: 16px;
+        margin: 10px;
+        /* Remove background-color change */
+        box-shadow: none;
+    }
+
+    table {
+        border: none; /* Remove table border */
+    }
+
     table,
     thead,
     tbody,
@@ -51,35 +113,87 @@ tr:hover {
     tr {
         display: block;
     }
+
     thead {
         display: none;
     }
+
     tr {
-        margin-bottom: 15px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        padding: 10px;
-        background-color: #fff;
+        margin-bottom: 20px;
+        background: var(--card-background);
+        border-radius: 16px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+        transition: all 0.3s ease;
+        padding: 16px;
+        /* Add border to match table border */
+        border: 2px solid var(--table-border);
     }
+
+    tr:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        border-color: var(--primary-color);
+        transition: all 0.3s ease;
+    }
+
     td {
-        display: block;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 16px;
         text-align: right;
-        padding-left: 50%;
-        position: relative;
-        border: none;
-        border-bottom: 1px solid #ddd;
+        border-bottom: 1px solid var(--border-color);
+        font-size: 0.9rem;
     }
-    td:last-child {
-        border-bottom: none;
-    }
+
     td::before {
         content: attr(data-label);
-        position: absolute;
-        left: 10px;
-        width: calc(50% - 20px);
-        padding-left: 15px;
-        font-weight: bold;
+        font-weight: 500;
+        color: var(--text-secondary);
         text-align: left;
+        padding-right: 16px;
     }
+
+    td:last-child {
+        border-bottom: none;
+        background-color: #f8fafc;
+        margin: 8px -16px -16px -16px;
+        border-radius: 0 0 16px 16px;
+        padding: 16px;
+    }
+
+    td.low-attendance {
+        color: #ef4444;
+    }
+
+    td.good-attendance {
+        color: #22c55e;
+    }
+
+    /* Add course code styling */
+    td[data-label="Course Code"] {
+        text-align: right;
+        background-color: #f1f5f9;
+        margin: -16px -16px 8px -16px;
+        border-radius: 14px 14px 0 0;
+        padding: 16px;
+        font-weight: 600;
+        color: var(--primary-color);
+        border-bottom: 2px solid var(--border-color);
+    }
+}
+
+/* Add new styles for the attendance percentage */
+.low-attendance,
+.good-attendance {
+    font-weight: 600;
+}
+
+.low-attendance {
+    color: #ef4444;
+}
+
+.good-attendance {
+    color: #22c55e;
 }
