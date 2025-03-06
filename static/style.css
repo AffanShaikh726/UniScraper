@@ -228,3 +228,10 @@ tr:hover {
         transform: rotate(360deg);
     }
 }
+td[data-label="Hours Conducted"],
+td[data-label="Hours Absent"] {
+    text-align: center;
+    font-weight: 600;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--border-color);
+}

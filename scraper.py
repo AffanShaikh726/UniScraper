@@ -110,5 +110,4 @@ def scrape_data() :
         output = jsonifyDataAI(content)
         return output
 
-
 # print(scrape_data())
