@@ -6,8 +6,9 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             return response.json();
         })
-        .then((data) => {
-            console.log(data);
+        .then((dataString) => {
+            const data = JSON.parse(dataString);
+            console.log(typeof data);
             const tableBody = document.getElementById("tableBody");
             if (data && data.courses) {
                 data.courses.forEach((course) => {
