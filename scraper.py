@@ -79,7 +79,7 @@ def scrape_data() :
         logger.info("Navigating to target page...")
         driver.get(os.getenv("AttendancePG_URL"))
 
-        time.sleep(15)
+        time.sleep(20)
         # Perform your scraping tasks
         logger.info("Performing scraping tasks...")
         content = driver.find_element(By.CLASS_NAME, "mainDiv").text

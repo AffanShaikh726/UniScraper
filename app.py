@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, render_template
 from flask_caching import Cache
 from scraper import scrape_data
+from testdata import base_data
 import threading
 
 app = Flask(__name__)
@@ -26,7 +27,7 @@ def fetch_data():
     # Fetch data outside the lock to avoid blocking other threads
     try:
         print("Fetching new data...")
-        data = scrape_data()  # Fetch the data
+        data = base_data()  # Fetch the data
         with lock:
             cached_data = data  # Update the cached data
     except Exception as e:
