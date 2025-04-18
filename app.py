@@ -1,18 +1,27 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, render_template
 from flask_caching import Cache
 from scraper import scrape_data
+from threading import Lock
 
 app = Flask(__name__)
 cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
-@cache.cached(timeout=2*3600)
-def get_cached_data():
-    print("cached")
-    return scrape_data()
+# Create a global lock for scrape_data
+scrape_lock = Lock()
 
-# # Method 1: Read entire file as string
-# with open("jsonFormat.txt", "r", encoding="utf-8") as file:
-#     data = file.read()
+@cache.cached(timeout=2*60)
+def get_cached_data():
+    # Acquire the lock to ensure only one scrape_data runs at a time
+    if not scrape_lock.acquire(blocking=False):
+        # If another scrape_data is running, return a message or cached data
+        return {"error": "Scraping is already in progress. Please try again later."}
+    
+    try:
+        # Call the scrape_data function
+        return scrape_data()
+    finally:
+        # Release the lock after scraping is complete
+        scrape_lock.release()
 
 @app.route('/')
 def index():
